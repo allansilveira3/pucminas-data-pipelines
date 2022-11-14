@@ -1,0 +1,41 @@
+defaultAirflowTag: "2.3.0"
+airflowVersion: "2.3.0"
+executor: "KubernetesExecutor"
+env:
+  - name: AIRFLOW__LOGGING__REMOTE_LOGGING
+    value: 'True'
+  - name: AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER
+    value: 's3://aws-logs-827879560236-us-east-2/logs'
+  - name: AIRFLOW__LOGGING__REMOTE_LOG_CONN_ID
+    value: 'my_aws'
+webserver:
+  defaultUser:
+    enabled: true
+    role: Admin
+    username: allan.silveira
+    email: allansilveira3@gmail.com
+    firstName: Allan
+    lastName: Silveira
+    password: admin
+  service:
+    type: LoadBalancer
+
+redis:
+  enabled: false
+
+dags:
+  gitSync:
+    enabled: true
+    repo: https://github.com/allansilveira3/pucminas-data-pipelines.git
+    branch: main
+    rev: HEAD
+    depth: 1
+    maxFailures: 0
+    subPath: "dags" 
+    wait: 60
+    containerName: git-sync
+    uid: 65533
+    securityContext: {}
+    extraVolumeMounts: []
+    env: []
+    resources: {}
