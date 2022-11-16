@@ -5,6 +5,7 @@ import pandas as pd
 from airflow.decorators import task, dag
 from airflow.operators.dummy import DummyOperator
 from airflow.models import Variable
+from datetime import datetime
 
 
 URL = "https://github.com/allansilveira3/pucminas-data-pipelines/blob/main/Unidades_Basicas_Saude_UBS.csv"
