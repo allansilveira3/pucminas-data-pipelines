@@ -26,7 +26,6 @@ def trabalho_final_dag():
         NOME_DO_ARQUIVO = "/tmp/ubs.csv"
         df = pd.read_csv(URL,sep=";",error_bad_lines=False)
         df.to_csv(NOME_DO_ARQUIVO, index=False, header=True, sep=";")
-        df.show(n=10)
         return NOME_DO_ARQUIVO
 
     @task #count por estado
@@ -45,7 +44,7 @@ def trabalho_final_dag():
     def quantidade_rj(nome_do_arquivo):
         NOME_TABELA = "/tmp/ubs_no_rio_de_janeiro.csv"
         df = pd.read_csv(nome_do_arquivo,sep=';')
-        res = df.where('UF=RIO_DE_JANEIRO').select("CNES","UF","NOME").show()
+        res = df.where('UF=RIO_DE_JANEIRO').select("CNES","UF","NOME")
         print(res)
         res.to_csv(NOME_TABELA, index=False, sep=";")
         return NOME_TABELA
