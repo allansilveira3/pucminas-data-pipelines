@@ -35,34 +35,6 @@ def trabalho_final_dag():
         NOME_DO_ARQUIVO = "/tmp/ubs.csv"
         df = pd.read_csv(URL,sep=';')
         df.to_csv(NOME_DO_ARQUIVO, index=False, header=True, sep=";")
-        df['UF'] = df['UF'].map({"11":"Rondonia",
-        "12":"Acre",
-        "13":"Amazonas",
-        "14":"Roraima",
-        "15":"Para",
-        "16":"Amapa",
-        "17":"Tocantins",
-        "21":"Maranhao",
-        "22":"Piaui",
-        "23":"Ceara",
-        "24":"Rio_Grande_do_Norte",
-        "25":"Paraiba",
-        "26":"Pernambuco",
-        "27":"Alagoas",
-        "28":"Sergipe",
-        "29":"Bahia",
-        "31":"Minas_Gerais",
-        "32":"Espirito_Santo",
-        "33":"Rio_de_Janeiro",
-        "35":"Sao_Paulo",
-        "41":"Parana",
-        "42":"Santa_Catarina",
-        "43":"Rio_Grande_do_Sul",
-        "50":"Mato_Grosso_do_Sul",
-        "51":"Mato_Grosso",
-        "52":"Goias",
-        "53":"Distrito_Federal"},na_action=None)
-        df.show(n=10)
         return NOME_DO_ARQUIVO
 
     @task #count por estado
@@ -81,7 +53,7 @@ def trabalho_final_dag():
     def quantidade_rj(nome_do_arquivo):
         NOME_TABELA = "/tmp/ubs_no_rio_de_janeiro.csv"
         df = pd.read_csv(nome_do_arquivo,sep=';')
-        res = df.where('UF=Rio_de_Janeiro').select("CNES","UF","NOME").show()
+        res = df.where('UF=33').select("CNES","UF","NOME").show()
         print(res)
         res.to_csv(NOME_TABELA, index=False, sep=";")
         return NOME_TABELA
