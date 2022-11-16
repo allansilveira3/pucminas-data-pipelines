@@ -1,11 +1,11 @@
-defaultAirflowTag: "2.3.0"
-airflowVersion: "2.3.0"
+defaultAirflowTag: "2.4.1"
+airflowVersion: "2.4.1"
 executor: "KubernetesExecutor"
 env:
   - name: AIRFLOW__LOGGING__REMOTE_LOGGING
     value: 'True'
   - name: AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER
-    value: 's3://aws-logs-827879560236-us-east-2/logs'
+    value: 's3://allan-silva-puc-827879560236-pre/logs/'
   - name: AIRFLOW__LOGGING__REMOTE_LOG_CONN_ID
     value: 'my_aws'
 webserver:
