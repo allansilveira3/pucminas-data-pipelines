@@ -5,16 +5,7 @@ import pandas as pd
 from airflow.decorators import task, dag
 from airflow.operators.dummy import DummyOperator
 from airflow.models import Variable
-import boto3
 
-aws_access_key_id = Variable.get('aws_access_key_id')
-aws_secret_access_key = Variable.get('aws_secret_access_key')
-
-client = boto3.client(
-    'emr', region_name='us-east-2',
-    aws_access_key_id=aws_access_key_id,
-    aws_secret_access_key=aws_secret_access_key
-)
 
 URL = "https://github.com/allansilveira3/pucminas-data-pipelines/blob/main/Unidades_Basicas_Saude_UBS.csv"
 
