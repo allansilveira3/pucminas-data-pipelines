@@ -23,31 +23,25 @@ def trabalho_final_dag():
 
     @task #Aquisção e tratamento do dado
     def ingestao():
-        NOME_DO_ARQUIVO = "https://github.com/allansilveira3/pucminas-data-pipelines/blob/main/ubs.csv"
         df = pd.read_csv(URL,sep=";",error_bad_lines=False)
         df.to_csv(NOME_DO_ARQUIVO, index=False, header=True, sep=";")
         return NOME_DO_ARQUIVO
 
     @task #count por estado
     def quantidade_por_estado(nome_do_arquivo):
-        NOME_TABELA = "https://github.com/allansilveira3/pucminas-data-pipelines/blob/main/ubs_por_estado.csv"
         df = pd.read_csv(nome_do_arquivo,sep=';')
         res = df.groupby(['UF']).agg({
             "CNES":"count"
         }).reset_index()
         print(res)
-        res.to_csv(NOME_TABELA, index=False, sep=";")
-        return NOME_TABELA
-    
-    
+        
+       
     @task #Count rio de janeiro
     def quantidade_rj(nome_do_arquivo):
-        NOME_TABELA = "https://github.com/allansilveira3/pucminas-data-pipelines/blob/mainp/ubs_no_rio_de_janeiro.csv"
         df = pd.read_csv(nome_do_arquivo,sep=';')
         res = df.where('UF=RIO_DE_JANEIRO').select("CNES","UF","NOME")
         print(res)
-        res.to_csv(NOME_TABELA, index=False, sep=";")
-        return NOME_TABELA
+        
 
 
     fim = DummyOperator(task_id="Fim")
