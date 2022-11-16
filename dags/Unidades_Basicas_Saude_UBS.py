@@ -6,7 +6,16 @@ from airflow.decorators import task, dag
 from airflow.operators.dummy import DummyOperator
 from airflow.models import Variable
 from datetime import datetime
+import boto3
 
+aws_access_key_id = Variable.get('aws_access_key_id')
+aws_secret_access_key = Variable.get('aws_secret_access_key')
+
+client = boto3.client(
+    'emr', region_name='us-east-2',
+    aws_access_key_id=aws_access_key_id,
+    aws_secret_access_key=aws_secret_access_key
+)
 
 URL = "https://github.com/allansilveira3/pucminas-data-pipelines/blob/main/Unidades_Basicas_Saude_UBS.csv"
 
@@ -26,7 +35,33 @@ def trabalho_final_dag():
         NOME_DO_ARQUIVO = "/tmp/ubs.csv"
         df = pd.read_csv(URL,sep=';')
         df.to_csv(NOME_DO_ARQUIVO, index=False, header=True, sep=";")
-        df['UF'] = df['UF'].map({"11":"Rondonia","12":"Acre","13":"Amazonas","14":"Roraima","15":"Para","16":"Amapa","17":"Tocantins","21":"Maranhao","22":"Piaui","23":"Ceara","24":"Rio_Grande_do_Norte","25":"Paraiba","26":"Pernambuco","27":"Alagoas","28":"Sergipe","29":"Bahia","31":"Minas_Gerais","32":"Espirito_Santo","33":"Rio_de_Janeiro","35":"Sao_Paulo","41":"Parana","42":"Santa_Catarina","43":"Rio_Grande_do_Sul","50":"Mato_Grosso_do_Sul","51":"Mato_Grosso","52":"Goias","53":"Distrito_Federal"},na_action=None)
+        df['UF'] = df['UF'].map({"11":"Rondonia",
+        "12":"Acre",
+        "13":"Amazonas",
+        "14":"Roraima",
+        "15":"Para",
+        "16":"Amapa",
+        "17":"Tocantins",
+        "21":"Maranhao",
+        "22":"Piaui",
+        "23":"Ceara",
+        "24":"Rio_Grande_do_Norte",
+        "25":"Paraiba",
+        "26":"Pernambuco",
+        "27":"Alagoas",
+        "28":"Sergipe",
+        "29":"Bahia",
+        "31":"Minas_Gerais",
+        "32":"Espirito_Santo",
+        "33":"Rio_de_Janeiro",
+        "35":"Sao_Paulo",
+        "41":"Parana",
+        "42":"Santa_Catarina",
+        "43":"Rio_Grande_do_Sul",
+        "50":"Mato_Grosso_do_Sul",
+        "51":"Mato_Grosso",
+        "52":"Goias",
+        "53":"Distrito_Federal"},na_action=None)
         df.show(n=10)
         return NOME_DO_ARQUIVO
 
