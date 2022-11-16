@@ -24,7 +24,7 @@ def trabalho_final_dag():
     @task #Aquisção e tratamento do dado
     def ingestao():
         NOME_DO_ARQUIVO = "/tmp/ubs.csv"
-        df = pd.read_csv(URL,sep=';')
+        df = pd.read_csv(URL,sep=";")
         df.to_csv(NOME_DO_ARQUIVO, index=False, header=True, sep=";")
         df['UF'] = df['UF'].map({"11":"Rondonia",
         "12":"Acre",
