@@ -45,7 +45,7 @@ def trabalho_final_dag():
     def quantidade_rj(nome_do_arquivo):
         NOME_TABELA = "/tmp/ubs_no_rio_de_janeiro.csv"
         df = pd.read_csv(nome_do_arquivo,sep=';')
-        res = df.where('UF=Rio_de_Janeiro').select("CNES","UF","NOME").show()
+        res = df.where('UF=RIO_DE_JANEIRO').select("CNES","UF","NOME").show()
         print(res)
         res.to_csv(NOME_TABELA, index=False, sep=";")
         return NOME_TABELA
