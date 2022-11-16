@@ -24,8 +24,8 @@ def trabalho_final_dag():
     @task #Aquisção e tratamento do dado
     def ingestao():
         df = pd.read_csv(URL,sep=";",error_bad_lines=False)
-        df.to_csv(NOME_DO_ARQUIVO, index=False, header=True, sep=";")
-        return NOME_DO_ARQUIVO
+        df.to_csv(index=False, header=True, sep=";")
+        return df
 
     @task #count por estado
     def quantidade_por_estado(nome_do_arquivo):
