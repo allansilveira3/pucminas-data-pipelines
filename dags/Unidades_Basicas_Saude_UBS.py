@@ -4,6 +4,7 @@ from operator import index
 import pandas as pd
 from airflow.decorators import task, dag
 from airflow.operators.dummy import DummyOperator
+from airflow.models import Variable
 import boto3
 
 aws_access_key_id = Variable.get('aws_access_key_id')
