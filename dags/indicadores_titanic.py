@@ -8,7 +8,7 @@ aws_access_key_id = Variable.get('aws_access_key_id')
 aws_secret_access_key = Variable.get('aws_secret_access_key')
 
 client = boto3.client(
-    'emr', region_name='us-east-1',
+    'emr', region_name='us-east-2',
     aws_access_key_id=aws_access_key_id,
     aws_secret_access_key=aws_secret_access_key
 )
